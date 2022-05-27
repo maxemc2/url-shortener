@@ -1,7 +1,7 @@
 name: Build and Deploy Frontend to GKE
 on:
   push:
-    path:
+    paths:
       - '**/frontend/**'
 
 # Environment variables
