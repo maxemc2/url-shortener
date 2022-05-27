@@ -10,7 +10,7 @@ env:
   SA_KEY: ${{ secrets.GKE_SA_KEY }}
   CLUSTER_NAME: test
   CLUSTER_ZONE: asia-east1-a
-  DEPLOYMENT_NAME: backend
+  DEPLOYMENT_NAME: backend-deployment
   IMAGE: backend
   SOURCE_PATH: backend
 
