@@ -47,7 +47,7 @@ jobs:
           credentials: ${{ env.SA_KEY }}
       
       - name: Test GKE credentials
-      - run: echo $KUBECONFIG
+        run: echo $KUBECONFIG
 
       # Build and Push the Docker image
       - name: Build and push the docker image
