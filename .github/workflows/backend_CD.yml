@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - '**/backend/**'
+      - '**/backend_CD.yml'
 
 # Environment variables
 env:
