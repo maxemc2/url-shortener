@@ -3,12 +3,17 @@ kind: Deployment
 metadata:
   name: backend-deployment
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: url-shortener
       tier: backend
       track: stable
-  replicas: 3
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
   template:
     metadata:
       labels:
