@@ -32,9 +32,3 @@ spec:
           env:
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: /var/secrets/google/key.json
-            - name: INSTANCE_ID
-              value: url-map
-            - name: TABLE_ID
-              value: url-shortner-table
-            - name: COLUMN_FAMILY_ID
-              value: url-mapping
