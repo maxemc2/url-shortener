@@ -25,10 +25,16 @@ spec:
           image: gcr.io/PROJECT_ID/IMAGE:TAG
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 3000
           volumeMounts:
             - name: google-application-credentials
               mountPath: /var/secrets/google
           env:
             - name: GOOGLE_APPLICATION_CREDENTIALS
               value: /var/secrets/google/key.json
+            - name: INSTANCE_ID
+              value: url-map
+            - name: TABLE_ID
+              value: url-shortner-table
+            - name: COLUMN_FAMILY_ID
+              value: url-mapping
