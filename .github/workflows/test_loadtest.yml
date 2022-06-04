@@ -13,15 +13,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       
-      - name: Run load testing
+      - name: Install WRK
         run: |
           sudo apt-get update -y
-          sudo apt-get install -y wrk
-          ./loadtest/loadtest_script.sh 100 2
+          sudo apt-get install -y build-essential libssl-dev git unzip 
+          git clone https://github.com/wg/wrk.git wrk
+          cd wrk
+          sudo make
+          sudo cp wrk /usr/local/bin
+          cd ..
+          rm -rf wrk
+
+      - name: Run load testing
+        run: ./loadtest/loadtest_script.sh 100 2
 
       - name: Commit logs
         run: |
           git config --global user.name 'AutoCommitBot'
           git config --global user.email 'bot@email.com'
+          git add loadtest/test_logs/*
           git commit -am "Commit load testing logs"
           git push origin loadtest_script_setup
