@@ -15,8 +15,8 @@ jobs:
       
       - name: Run load testing
         run: |
-          apt-get update -y
-          apt-get -y install wrk
+          sudo apt-get update -y
+          sudo apt-get install -y wrk
           ./loadtest/loadtest_script.sh 100 2
 
       - name: Commit logs
