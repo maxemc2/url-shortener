@@ -1,0 +1,24 @@
+name: Test workflow on running load testing
+on:
+  push:
+    branches: 
+      - loadtest_script_setup
+
+jobs:
+  run-loadtest:
+    name: Run load testing and save logs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - name: Run load testing
+        run: bash loadtest/loadtest_script.sh 100 2
+
+      - name: Commit logs
+        run: |
+          git config --global user.name 'AutoCommitBot'
+          git config --global user.email 'bot@email.com'
+          git commit -am "Commit load testing logs"
+          git push origin loadtest_script_setup
