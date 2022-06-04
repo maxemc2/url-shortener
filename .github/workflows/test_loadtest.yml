@@ -25,7 +25,9 @@ jobs:
           sudo rm -rf wrk
 
       - name: Run load testing
-        run: ./loadtest/loadtest_script.sh 100 2
+        run: |
+          cd loadtest
+          ./loadtest_script.sh 200 4
 
       - name: Commit logs
         run: |
