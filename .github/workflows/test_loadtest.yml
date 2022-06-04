@@ -22,7 +22,7 @@ jobs:
           sudo make
           sudo cp wrk /usr/local/bin
           cd ..
-          rm -rf wrk
+          sudo rm -rf wrk
 
       - name: Run load testing
         run: ./loadtest/loadtest_script.sh 100 2
@@ -32,5 +32,5 @@ jobs:
           git config --global user.name 'AutoCommitBot'
           git config --global user.email 'bot@email.com'
           git add loadtest/test_logs/*
-          git commit -am "Commit load testing logs"
+          git commit -m "Commit load testing logs"
           git push origin loadtest_script_setup
