@@ -14,7 +14,9 @@ jobs:
         uses: actions/checkout@v3
       
       - name: Run load testing
-        run: bash loadtest/loadtest_script.sh 100 2
+        run: |
+          chmod +x ./loadtest/loadtest_script.sh
+          ./loadtest/loadtest_script.sh 100 2
 
       - name: Commit logs
         run: |
