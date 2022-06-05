@@ -3,7 +3,7 @@
     <!-- Header -->
     <header id="header">
       <div class="logo">
-        <a class="green-btn-text" href="#">Url Shortener</a>
+        <a class="green-btn-text" href="#">URL Shortener</a>
       </div>
     </header>
     <!-- End Header -->
