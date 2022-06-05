@@ -31,11 +31,8 @@
     <div class="modal fade" id="reminderModal" tabindex="-1" aria-labelledby="reminderModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-header">
-            <p>縮短網址：</p>
-          </div>
           <div class="modal-body">
-            <p>{{ shortenedUrl }}</p>
+            <p>{{ model.body }}</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn green-btn-bg" data-bs-dismiss="modal">確定</button>
@@ -70,7 +67,10 @@ export default {
         'https://www.shorturl.at/',
         'https://getbootstrap.com/',
         'https://ithelp.ithome.com.tw/'
-      ]
+      ],
+      model: {
+        body: '縮短網址：'
+      }
     }
   },
   components: { Datepicker },
@@ -83,20 +83,27 @@ export default {
       var seconds = this.timeInput.hours * 3600 + this.timeInput.minutes * 60;
       var response = null;
       var reminderModal = new Modal(select('#reminderModal'));
-      var ipAddress = '/api/';
+      var ipAddress = 'http://localhost:3000/';
 
-      console.log(ipAddress + 'urlgen');
+      axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+      axios.defaults.headers.common['Access-Control-Allow-Methods'] = 'GET, PUT, POST, DELETE, OPTIONS, post, get';
+      axios.defaults.headers.common['Access-Control-Allow-Credentials'] = 'true';
       axios.post(ipAddress + 'urlgen',{
         'url': this.urlInput,
         'expiry': seconds
       })
       .then(info => (console.log(info)))
-      .catch(error => (console.log(error)));  
+      .catch(error => (console.log(error)));
 
       setTimeout(() => {
-        console.log(ipAddress + response);
         if(response != null){
           this.shortenedUrl = ipAddress + response;
+          this.model.body = '縮短網址： ' + this.shortenedUrl;
+          reminderModal.show();
+        }
+        else{
+          this.shortenedUrl = '';
+          this.model.body = '縮短網址已經過期或沒有儲存過！';
           reminderModal.show();
         }
       }, 300);
@@ -157,5 +164,9 @@ export default {
       background: #fff;
     }
   }
+}
+
+.modal-dialog{
+  margin-top: calc(min(20%, 300px)) !important;
 }
 </style>
